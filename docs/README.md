@@ -12,9 +12,10 @@ python -m http.server 8000 --directory docs
 
 Open `http://localhost:8000`.
 
-Run both repository checks before proposing a change:
+Run both repository checks before proposing a change. On systems where `python` is not
+registered, use the platform's Python 3 launcher, commonly `python3` or `py -3`:
 
-```bash
+```text
 python scripts/validate.py
 python scripts/validate_ui.py
 ```

@@ -82,7 +82,7 @@ on:
       - created
       - edited
   schedule:
-    - cron: "24 */12 * * *"
+    - cron: "23 */12 * * *"
   workflow_dispatch:
     inputs:
       aw_context:

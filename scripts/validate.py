@@ -21,6 +21,8 @@ REQUIRED = [
     ROOT / "CONTRIBUTING.md",
     ROOT / "SECURITY.md",
     ROOT / "AGENTS.md",
+    ROOT / ".github" / "agents" / "agentic-workflows.md",
+    ROOT / ".github" / "skills" / "agentic-workflows" / "SKILL.md",
     SKILL / "SKILL.md",
     SKILL / "MODELS.md",
     SKILL / "WORKFLOW.md",
@@ -31,6 +33,7 @@ REQUIRED = [
     SKILL / "team" / "gilfoyle.md",
     SKILL / "team" / "jian-yang.md",
     SKILL / "team" / "erlich-bachman.md",
+    ROOT / ".github" / "aw" / "instructions.md",
     SITE / "index.html",
     SITE / "styles.css",
     SITE / "app.js",
@@ -174,12 +177,45 @@ def validate_agentic_workflows(errors: list[str]) -> None:
         if term.casefold() not in program_text.casefold():
             fail(f".github/ISSUE_TEMPLATE/graphite-program.yml missing field: {term}", errors)
 
+    overlay_text = (ROOT / ".github" / "aw" / "instructions.md").read_text(encoding="utf-8")
+    for term in ["AGENTS.md", "untrusted input", "one bounded checkpoint", "graphite-generated", "gh aw compile", "human authority"]:
+        if term.casefold() not in overlay_text.casefold():
+            fail(f".github/aw/instructions.md missing repository overlay rule: {term}", errors)
+
+    adapter_checks = {
+        ROOT / ".github" / "agents" / "agentic-workflows.md": ["Graphite-authored adapter", "AGENTS.md", "gh-aw", "untrusted input"],
+        ROOT / ".github" / "skills" / "agentic-workflows" / "SKILL.md": ["repository-owned router", "AGENTS.md", "gh-aw", "human"],
+    }
+    for path, terms in adapter_checks.items():
+        adapter_text = path.read_text(encoding="utf-8")
+        for term in terms:
+            if term.casefold() not in adapter_text.casefold():
+                fail(f"{path.relative_to(ROOT)} missing adapter contract: {term}", errors)
+
+
+def validate_documentation_references(errors: list[str]) -> None:
+    """Catch documentation commands that refer to scripts absent from the repository."""
+    documentation = [
+        ROOT / "README.md",
+        ROOT / "CONTRIBUTING.md",
+        ROOT / "docs" / "README.md",
+        ROOT / ".github" / "ISSUE_TEMPLATE" / "graphite-goal.yml",
+        ROOT / ".github" / "ISSUE_TEMPLATE" / "graphite-program.yml",
+    ]
+    pattern = re.compile(r"(?<![\w/])scripts/([A-Za-z0-9_.-]+\.py)\b")
+    for path in documentation:
+        text = path.read_text(encoding="utf-8")
+        for script_name in sorted(set(pattern.findall(text))):
+            script_path = ROOT / "scripts" / script_name
+            if not script_path.is_file():
+                fail(f"{path.relative_to(ROOT)} references missing script: scripts/{script_name}", errors)
+
 
 def main() -> int:
     errors: list[str] = []
 
-    if VERSION != "0.0.1":
-        fail(f"VERSION must be 0.0.1 for this release, found {VERSION!r}", errors)
+    if not re.fullmatch(r"\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?", VERSION):
+        fail(f"VERSION must be a semantic version, found {VERSION!r}", errors)
 
     for path in REQUIRED:
         if not path.is_file():
@@ -229,6 +265,7 @@ def main() -> int:
 
     validate_site(errors)
     validate_agentic_workflows(errors)
+    validate_documentation_references(errors)
 
     if errors:
         for error in errors:

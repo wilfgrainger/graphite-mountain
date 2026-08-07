@@ -8,7 +8,7 @@ run automation, disable or remove the generated workflows before publishing.
 
 ## Install and compile
 
-From the repository root:
+From the repository root on any platform with GitHub CLI and the `gh-aw` extension:
 
 ```bash
 gh extension install github/gh-aw
@@ -19,6 +19,10 @@ gh aw compile graphite-goal graphite-autoloop graphite-issue-forge
 Review every generated lock file, permissions block, tool declaration, trigger, budget,
 and safe output before committing it. Compile again whenever a source Markdown file
 changes. Keep the generated lock files in the same change as their source.
+
+Repository-specific workflow rules live in [`../aw/instructions.md`](../aw/instructions.md)
+and inherit the canonical policy in [`../../AGENTS.md`](../../AGENTS.md). Do not duplicate
+those rules in a platform-specific agent file.
 
 Create the labels once:
 

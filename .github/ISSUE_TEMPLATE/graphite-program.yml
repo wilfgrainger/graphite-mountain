@@ -23,7 +23,7 @@ body:
       description: Provide a command that prints one numeric metric and say whether lower or higher is better.
       render: bash
       placeholder: |
-        python scripts/benchmark.py --json | python scripts/read_metric.py
+        <reproducible command that prints exactly one numeric value>
         Direction: lower is better
     validations:
       required: true

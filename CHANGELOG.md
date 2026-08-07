@@ -11,7 +11,7 @@ All notable changes to Graphite Mountain are documented here.
 - Static-site validation for required metadata, accessibility affordances, local assets, team coverage, lifecycle coverage, and external dependency avoidance.
 - Accessible mobile navigation with Escape, outside-click, and section-aware states.
 - Practical `full-team`, `review`, and `rescue` starting modes with reusable copy actions.
-- A clean-machine macOS/Linux install path that clones temporarily and removes the checkout after installation.
+- Cross-platform install guidance with a clean-machine macOS/Linux path, a Windows PowerShell equivalent, and a runtime-neutral direct-path option.
 - Focused UI validation for mobile navigation, mode prompts, lifecycle visibility, install accuracy, and progressive interactions.
 - Local SVG site icon and social-sharing metadata.
 - Consistent assistive-technology feedback for every copy action.
@@ -19,6 +19,8 @@ All notable changes to Graphite Mountain are documented here.
 - Role-first agentic sub-workflows for guided intake, goals, measurable autoloops, review loops, and evidence-backed issue generation.
 - First-class model guidance with capability profiles, run-record fields, and planner/executor/evaluator/reviewer separation for Autoloop.
 - Public Autoloop mode prompt, baseline and budget fields, and a safer generated-workflow activation checklist.
+- Repository-local GitHub Agentic Workflows overlay aligned with the canonical `AGENTS.md` policy.
+- Documentation-reference validation that catches commands pointing at missing repository scripts.
 
 ### Changed
 
@@ -28,6 +30,7 @@ All notable changes to Graphite Mountain are documented here.
 - Layered the UI uplift over the existing design system to preserve the current identity and simplify rollback.
 - Reframed the public operating model around professional role names while retaining Silicon Valley aliases as a v0.x compatibility layer.
 - Tightened public wording from lifecycle-complete/validated claims to evidence-backed repository checks and clarified the fan-reference boundary.
+- Relaxed the validator's release-version guard from a hard-coded version to semantic-version validation.
 
 ## [0.0.1] - 2026-08-02
 

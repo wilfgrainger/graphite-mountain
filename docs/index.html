@@ -321,7 +321,7 @@
       <div class="section-heading">
         <p class="eyebrow"><span aria-hidden="true"></span> Start using it</p>
         <h2>Install once. Invoke it in plain English.</h2>
-        <p>The clean-machine command below clones the repository temporarily, installs the skill, and removes the temporary checkout.</p>
+        <p>The skill is plain Markdown: clone or download the repository, then load the skill folder through your agent runtime. The command below is the Claude Code macOS / Linux path; Windows PowerShell instructions and direct-path guidance are in the README.</p>
       </div>
 
       <div class="install-grid">
@@ -336,6 +336,7 @@ mkdir -p ~/.claude/skills
 cp -R "$tmp/graphite-mountain/skills/graphite-mountain" ~/.claude/skills/
 rm -rf "$tmp"</code></pre>
           <p class="copy-status" role="status" aria-live="polite"></p>
+          <p class="copy-status install-note" role="note">Windows PowerShell and platform-neutral direct-path instructions: see <a href="https://github.com/wilfgrainger/graphite-mountain/blob/main/README.md#install">README.md</a>.</p>
         </div>
         <div class="invoke-card">
           <p class="label">Example invocation</p>

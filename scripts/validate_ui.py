@@ -54,6 +54,7 @@ def main() -> int:
         "rescue prompt": 'id="prompt-rescue"',
         "clean-machine clone": "git clone --depth 1 https://github.com/wilfgrainger/graphite-mountain.git",
         "temporary checkout cleanup": 'rm -rf "$tmp"',
+        "cross-platform install guidance": "Windows PowerShell and platform-neutral direct-path instructions",
     }
     for label, expected in html_requirements.items():
         require_text(HTML, expected, label, errors)
@@ -113,6 +114,8 @@ def main() -> int:
         "model guidance documentation": "## Model suggestions",
         "guided intake documentation": "## Start with guided questions",
         "clean-machine installation": "git clone --depth 1 https://github.com/wilfgrainger/graphite-mountain.git",
+        "Windows installation guidance": "Windows PowerShell",
+        "portable skill path": "skills/graphite-mountain/SKILL.md",
         "focused UI validator command": "python scripts/validate_ui.py",
     }
     for label, expected in readme_requirements.items():

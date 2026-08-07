@@ -143,7 +143,18 @@ Every member has equal rights to add context, challenge assumptions, propose cha
 
 ## Install
 
-From a macOS or Linux shell, this clean-machine command temporarily clones the repository, installs the skill, and removes the temporary checkout:
+The skill is plain Markdown and does not require a package manager, runtime service, or
+platform-specific project layout. On any platform, clone or download the repository and
+load [`skills/graphite-mountain/SKILL.md`](skills/graphite-mountain/SKILL.md) through the
+agent runtime's documented skill mechanism. The skill folder is the portable unit; do not
+copy only one profile or one workflow file.
+
+For Claude Code users, the following clean-machine commands install the skill into the
+standard user skill directory. Use the block for the shell you are running:
+
+### macOS / Linux shell
+
+This command temporarily clones the repository, installs the skill, and removes the checkout:
 
 ```bash
 tmp="$(mktemp -d)"
@@ -152,6 +163,20 @@ mkdir -p ~/.claude/skills
 cp -R "$tmp/graphite-mountain/skills/graphite-mountain" ~/.claude/skills/
 rm -rf "$tmp"
 ```
+
+### Windows PowerShell
+
+```powershell
+$tmp = Join-Path ([System.IO.Path]::GetTempPath()) ("graphite-mountain-" + [guid]::NewGuid())
+git clone --depth 1 https://github.com/wilfgrainger/graphite-mountain.git "$tmp\graphite-mountain"
+New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null
+Copy-Item -Recurse -Force "$tmp\graphite-mountain\skills\graphite-mountain" "$HOME\.claude\skills"
+Remove-Item -Recurse -Force $tmp
+```
+
+If the runtime uses another skill directory, copy the same `skills/graphite-mountain`
+folder to that runtime's documented location. Keep `AGENTS.md` as the repository policy;
+do not create a second copy of the policy for each operating system.
 
 Other runtimes can load [`skills/graphite-mountain/SKILL.md`](skills/graphite-mountain/SKILL.md) directly or add the folder to their skill-discovery path.
 

@@ -8,7 +8,7 @@ The character names Jared, Richard Hendricks, Dinesh, Gilfoyle, Jian-Yang, and E
 
 All delivery methodology, prompts, role responsibilities, workflow language, templates, validation code, and documentation in this repository are original to this project unless explicitly stated otherwise.
 
-The GitHub Agentic Workflows integration is an explicit third-party boundary: the dispatcher and router under `.github/agents/` and `.github/skills/agentic-workflows/`, the configuration under `.github/aw/`, and generated workflow runtimes under `.github/workflows/*.lock.yml` are produced from or governed by GitHub's `gh-aw` project. Consult the upstream project and its MIT licence for that integration material: https://github.com/github/gh-aw.
+The GitHub Agentic Workflows integration is an explicit third-party boundary: the dispatcher and router under `.github/agents/` and `.github/skills/agentic-workflows/` are Graphite-authored adapters that link to GitHub's `gh-aw` documentation; the configuration under `.github/aw/` and generated workflow runtimes under `.github/workflows/*.lock.yml` integrate with or are produced by that project. GitHub, Inc. remains the copyright holder for upstream `gh-aw` material; consult the upstream project and its MIT licence for that integration material: https://github.com/github/gh-aw.
 
 The MIT License applies only to material owned by this repository's contributors. It does not grant rights to third-party names, characters, programmes, marks, or other intellectual property.
 
