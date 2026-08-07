@@ -1,0 +1,98 @@
+name: Graphite Goal
+description: Create one evidence-backed objective for the Graphite Goal workflow
+title: "[Graphite Goal] "
+labels:
+  - graphite-goal
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for one coherent objective with a clear stopping condition. The workflow will not implement a vague backlog item or guess a missing product decision.
+
+        Review the generated issue before leaving the `graphite-goal` label in place.
+  - type: input
+    id: goal
+    attributes:
+      label: Goal
+      description: State the intended observable end state in one sentence.
+      placeholder: "Improve the repository's accessibility score without changing the public navigation model."
+    validations:
+      required: true
+  - type: textarea
+    id: completion-contract
+    attributes:
+      label: Completion Contract
+      description: Define exactly what must be true before the workflow marks this complete.
+      placeholder: |
+        Complete only when:
+        - ...
+        - ...
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence / Verification
+      description: Name the commands, artifacts, screenshots, logs, or checks that prove the contract.
+      render: bash
+      placeholder: |
+        python scripts/validate.py
+        python scripts/validate_ui.py
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and Constraints
+      description: Say what the workflow may change and what it must protect.
+      placeholder: |
+        The workflow may change:
+        - ...
+
+        The workflow must not change:
+        - ...
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context To Read First
+      description: Point the workflow at the files, docs, issues, PRs, logs, designs, or examples it should inspect first.
+      placeholder: |
+        - README.md
+        - skills/graphite-mountain/WORKFLOW.md
+        - #123
+    validations:
+      required: true
+  - type: textarea
+    id: iteration-policy
+    attributes:
+      label: Iteration Policy
+      description: Explain how to choose the next checkpoint and report progress.
+      placeholder: |
+        Work in one bounded checkpoint at a time. After each run, report what changed, what was verified, what remains, and whether anything is blocked.
+    validations:
+      required: true
+  - type: textarea
+    id: blocked-stop-condition
+    attributes:
+      label: Blocked Stop Condition
+      description: Define when the workflow must stop substantive work and comment instead of guessing.
+      placeholder: |
+        Stop and comment if the work needs unavailable credentials, an unresolved product decision, or a failed safety check.
+    validations:
+      required: true
+  - type: checkboxes
+    id: readiness
+    attributes:
+      label: Ready to start
+      description: These checks keep the autonomous loop bounded.
+      options:
+        - label: This is one coherent objective, not a loose backlog.
+          required: true
+        - label: The completion contract has observable evidence.
+          required: true
+        - label: The constraints prevent accidental broad rewrites.
+          required: true
+        - label: The workflow can tell the difference between done, not yet, and blocked.
+          required: true

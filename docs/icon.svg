@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Graphite Mountain">
+  <rect width="64" height="64" rx="16" fill="#0b0e12"/>
+  <path d="M9 50 25 18l9 15 7-10 14 27H9Z" fill="none" stroke="#66f2c2" stroke-width="4" stroke-linejoin="round"/>
+  <path d="m20 39 5-10 6 10 4-6 7 9" fill="none" stroke="#f4f7f8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

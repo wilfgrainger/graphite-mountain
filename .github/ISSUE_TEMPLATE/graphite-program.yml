@@ -1,0 +1,108 @@
+name: Graphite Autoloop Program
+description: Create a measurable, bounded improvement loop
+title: "[Graphite Program] "
+labels:
+  - graphite-program
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for a measurable improvement experiment. Each run tries one hypothesis, runs the evaluator and regression checks, and keeps the change only if the declared metric improves.
+  - type: input
+    id: goal
+    attributes:
+      label: Goal
+      description: State the improvement objective and the desired direction.
+      placeholder: "Reduce the median validation runtime; lower is better."
+    validations:
+      required: true
+  - type: textarea
+    id: metric
+    attributes:
+      label: Evidence / Verification
+      description: Provide a command that prints one numeric metric and say whether lower or higher is better.
+      render: bash
+      placeholder: |
+        python scripts/benchmark.py --json | python scripts/read_metric.py
+        Direction: lower is better
+    validations:
+      required: true
+  - type: textarea
+    id: baseline
+    attributes:
+      label: Baseline
+      description: Record the current numeric result, input/fixture, environment, and date before the first experiment.
+      render: text
+      placeholder: |
+        Baseline: 12.4
+        Fixture / environment: ...
+        Measured: 2026-08-05
+    validations:
+      required: true
+  - type: input
+    id: target-metric
+    attributes:
+      label: Target metric (optional)
+      description: Leave blank for an explicitly open-ended program; otherwise give the stopping threshold.
+      placeholder: "0.80"
+  - type: textarea
+    id: completion-contract
+    attributes:
+      label: Completion Contract
+      description: Define exactly when the program is complete beyond the metric threshold.
+      placeholder: |
+        Complete only when the target metric is reached, regressions pass, and ...
+    validations:
+      required: true
+  - type: textarea
+    id: model-budget
+    attributes:
+      label: Model profile and run budget
+      description: State the capability profile or exact model setting if constrained, plus the per-run and total time/token/money budget.
+      placeholder: |
+        Profile: frontier reasoning for hypothesis/review; coding agent for the candidate
+        Budget: one experiment per run; 20 minutes and 25K tokens per run; stop after three non-improving runs
+        If the runtime chooses: record the actual model and effort in each run comment.
+    validations:
+      required: true
+  - type: textarea
+    id: regression
+    attributes:
+      label: Regression checks
+      description: List the checks that must pass for a candidate to be retained.
+      render: bash
+      placeholder: |
+        python scripts/validate.py
+        python scripts/validate_ui.py
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and Constraints
+      description: Bound the files and behavior the loop may change or must protect.
+      placeholder: |
+        Allowed files:
+        - ...
+
+        Protected behavior:
+        - ...
+    validations:
+      required: true
+  - type: textarea
+    id: policy
+    attributes:
+      label: Iteration and stop policy
+      description: Define one-experiment checkpoints, budget, plateau, and blocked conditions.
+      placeholder: |
+        Try one hypothesis per run. Stop after three non-improving runs or if a check needs unavailable access.
+    validations:
+      required: true
+  - type: textarea
+    id: blocked-stop-condition
+    attributes:
+      label: Blocked Stop Condition
+      description: Define when the loop must stop instead of guessing or spending another run.
+      placeholder: "Stop after three non-improving runs, unavailable dependencies, or any failed safety check."
+    validations:
+      required: true
